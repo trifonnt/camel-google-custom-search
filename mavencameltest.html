@@ -1,0 +1,418 @@
+<a href="articles.html">&bull; Articles</a>
+<a href="computing_articles.html">&bull; Articles about computing</a>
+<a href="development_articles.html">&bull; Articles about software development</a>
+<a href="apache-integration.html">&bull; Apache integration software</a>
+
+<h1>Creating an Apache Camel route in Java using Maven, step-by-step</h1>
+
+<h2>Summary</h2>
+
+The article follows on from my previous article
+<a href="cameltest.html">Creating an Apache Camel route in Java from the ground
+up</a>. In that article I explained how to build and run an Apache
+Camel route specified in Java using only a command prompt. In my view, there
+is no better way to get a detailed understanding of how software like
+Camel or ActiveMQ can be used than to drive it from the command line, managing
+all the dependencies manually. If you followed that article, however, 
+you'll have realized how awkward it is to build and run Java code that has
+large numbers of dependencies that way. Of course, that is why we all 
+use build and dependency management frameworks, even if we don't use
+IDEs. 
+<p/>
+This article describes the implementation of exactly the same file-copier
+Camel route, but using Maven to manage the dependencies, and
+to build and run the application. Even if you're broadly familiar with the
+technology, I would recommend that you read the
+<a href="cameltest.html">previous article</a>, at least in outline, even
+if you don't try the detailed steps. Unless you do that, the sophistication
+of Maven completely obscures the complexity of the build process. 
+Pragmatically, that's not a bad thing; but it's not very educational.
+<p/>
+This article describes Maven in outline, then explains how to use it to
+build a Camel application into a stand-alone JAR file that can be
+executed; the JAR file will contain all the dependencies needed to
+run the application.
+<p/>
+We proceed step-by-step, starting with the installation of
+Maven, then entering the necessary code and configuration.
+However, if you want to see the example working without cutting-and-pasting
+all the source code, the complete Maven workspace is available from
+the Downloads section at the end of this article.
+
+<h2>About Maven</h2>
+
+<a href="http://maven.apache.org/">Apache Maven</a> is a build and dependency
+management tool for Java development. In some ways it is similar to Ant, 
+in that it automates the steps necessary to build and package an 
+application. It is different from Ant, and indeed from most build management
+tools, in two important ways:
+<p>
+1. It integrates dependency management, and can retrieve libraries from
+a central repository, and <br/>
+2. it is configured in a rather declarative way -- in general it 
+is not necessary, and sometimes not even possible, to specify the exact
+relationships between build steps.
+<p/>
+This second point is summed up in the phrase <i>convention over 
+configuration</i> that is often in the context of Maven. Maven assumes
+that developers will follow essentially the same conventions about
+such things as file naming and directory layout; if they do, then 
+everything works as if by magic. If not, then getting Maven to behave can
+be a battle. My experience is that, if you're going to use Maven in a
+software project, it's best to use it from the very start, and let it
+set things up as it likes; retro-fitting Maven to an existing, complex
+project is not a task to that is likely to give much pleasure. 
+<p/>
+Like Ant, Maven is configured using an XML file 
+(conventionally <code>pom.xml</code>). Although Maven will create a
+skeleton <code>pom.xml</code> for a project, very often this file will
+be managed using an IDE tool -- it's not impossible to 
+use a text editor, but it's not a whole heap of fun. The
+XML file not only specifies what
+operations will be needed to build the project, but also the other
+components on which it has dependencies. Most of the libraries needed to
+support development for Apache software (Camel, ActiveMQ, Tomcat...)
+are available from a central repository, so adding these to your
+project should involve no more work than adding a few lines to
+<code>pom.xml</code>.
+<p/>
+Whatever its strengths and weaknesses, there's no doubt that Maven has become
+very popular in the open-source Java domain. Most books and articles
+about development with Apache integration software more-or-less assume its
+use, so it's difficult get by without at least a working knowledge of
+Maven.
+
+<h2>Step 1: obtain and install Maven</h2>
+
+How easy or difficult this is depends on your platform;
+it's rarely more difficult than downloading and unpacking a tarball, and
+setting a few environment variables; and it may be much easier.
+Binaries are available from the 
+<a href="https://maven.apache.org/download.cgi">Maven download page</a>,
+which also contains detailed installation instructions for
+various platforms. 
+<p/>
+On RedHat-based Linux system, installation of Maven should be as
+easy as running
+<pre class="codeblock">
+# yum install maven
+</pre>
+At the time of writing this will get you version 3.0.5, which is not the
+latest version, but it's good enough for the purposes of
+this article. 
+
+<table border="0" cellpadding="5" hspace="30" vspace="30"
+  style="border: 1px solid gray"><tr><td>
+It goes without saying that you need a Java JVM to run Maven.
+If you are using a RedHat or Fedora Linux system (and possibly other
+distributions), be aware that the
+Linux installer probably installs the OpenJDK Java compiler, which is
+not compatible with Maven, as it lacks the bits 
+that Maven requires for compiling Java code. If you don't want to
+replace the platform Java, just install a Sun/Oracle JDK in a different
+directory, and run Maven using <code>JAVA_HOME=... mvn...</code> 
+</td></tr></table>
+
+To test that Maven is correctly installed, just run
+
+<pre class="codeblock">
+% mvn --version
+</pre>
+
+which should provide some version information.
+
+<h2>Step 2: Create a Maven project workspace</h2>
+
+The "convention over configuration"
+philosophy adopted by Maven requires that a project workspace is set up
+in a particular way. There's nothing particularly objectionable about
+its prefered set-up -- in fact, it's pretty natural for Java work. However 
+because we <i>don't</i> all naturally 
+set things up in exactly the way Maven likes, the usual way to start working
+with Maven is to have it create a project workspace, layed out
+the way it likes. The workspace is configured according to a template
+which is called an <i>archetype</i> in Maven jargon. There are a 
+great many such archetypes available, to suit different application
+types.
+For this example, we'll use the <code>camel-archetype-java</code>
+archetype. This archetype has the following characteristics.
+<ul>
+<li>The project file <code>pom.xml</code> specifies dependencies on
+the Camel core framework, as well as a number of other components
+that are likely to be useful, such as <code>log4j</code>.</li>
+<li>The project includes some simple boilerplate code to initialize
+Camel and configure a simple route; this can be used as the basis of a
+real application.</li>
+<li>A default <code>log4j</code> configuration file is created</li>
+<li>The project file includes a plugin to allow the complete application
+to be run at the command line, with a classpath that includes all the
+relevant dependencies.</li>
+</ul> 
+
+To create the project workspace using the <code>camel-archetype-java</code>
+layout, issue the following command in a suitable directory.
+
+<pre class="codeblock"/>
+$ mvn archetype:generate \
+-DarchetypeGroupId=org.apache.camel.archetypes \
+-DarchetypeArtifactId=camel-archetype-java \
+-DarchetypeVersion=2.12.1  
+\-DgroupId=net.kevinboone.mavencameltest\
+-DartifactId=mavencameltest
+</pre>
+
+The switches <code>artifactId</code>, <code>groupId</code>, and
+<code>version</code> uniquely identify the project so 
+that it can, in principle,
+become part of a Maven repository itself. More prosaically,
+<code>artifactId</code> becomes the name of the new directory 
+created to hold the project files, and <code>groupId</code> becomes
+the package name of the boilerplate Java code that Maven
+generates.
+<p/>
+<table border="0" cellpadding="5" hspace="30" vspace="20"
+  style="border: 1px solid gray"><tr><td>
+Note that it isn't necessary to install Camel explicitly to build a 
+Camel project with Maven -- the necessary bits will be downloaded
+automatically, and stored in a local repository 
+(<code>$HOME/.m2/repository</code> on Linux). When we say
+<code>archetypeVersion=x.x.x</code>, we're indicating the version
+of Camel we <i>want</i>, not the version we <i>have</i>.
+</td></tr></table>
+
+The generated project workspace will have a reasonably familiar layout,
+even if it is not the one a particular developer would have
+chosen. There is a <code>src/main/java</code> directory which
+forms the root of the Java source code; a <code>target</code>
+directory for the output of the build process, and 
+<code>src/main/resources</code> for configuration files.
+You can freely add new directories to <code>src/main/java</code> and
+Maven will Do the Right Thing and assume you want them compiled.
+<p/>
+I'm not going to reproduce the generated <code>pom.xml</code> here, but
+there are a few points of note.
+<p/>
+<pre class="codeblock" lang="xml">
+   <mainClass>net.kevinboone.mavencameltest.MainApp</mainClass>
+</pre>
+
+This entry specifies the class that will be run when we tell Maven
+to 'exec:java'. The source of this class 
+is generated automatically, and contains
+a <code>main()</code> method that initializes Camel and creates a 
+simple route.
+<p/>
+
+<pre class="codeblock" lang="xml">
+  <dependency>
+    <groupId>org.apache.camel</groupId>
+    <artifactId>camel-core</artifactId>
+    <version>2.12.1</version>
+  </dependency>
+</pre>
+
+This section specifies a dependency -- on <code>camel-core</code> in
+this case. Maven will automatically download and store dependent
+modules before building the project.
+
+<h2>Step 3: Coding the route</h2>
+
+The automatically-generated boilerplate code will create a default
+route; in fact, it should be ready to run as soon as the project
+workspace is created. However, I want to make this route the
+same as the one described in the earlier article on Camel, so
+it will be necessary to replace the default route.
+<p/>
+If you look at the boilerplate class 
+<code>src/main/java/net/kevinboone/mavencameltest/MainApp.java</code>
+you'll see that it delegates the actual route configuration to 
+the class <code>MyRouteBuilder</code>, which is in the same package,
+and therefore in the same directory. This should be replaced by 
+the following code.
+
+<pre class="codeblock" lang="java">
+/*=========================================================================
+A simple Camel file copier route, for use with the Maven
+camel-java archetype.
+=========================================================================*/
+
+package net.kevinboone.mavencameltest;
+import org.apache.camel.builder.RouteBuilder;
+
+public class MyRouteBuilder extends RouteBuilder
+  {
+  public void configure()
+    {
+    // Override the configure() method to define the route. We're
+    //  reading from a directory, logging, and then copying to a 
+    //  directory. The log class is defined to be
+    //  net.kevinboone.mavencameltest.MyRouteBuilder -- we'll need
+    //  this information for the log4j configuration file
+    from ("file:/tmp/in?noop=true")
+     .to("log:net.kevinboone.mavencameltest.MyRouteBuilder?level=DEBUG")
+       .to("file:/tmp/out");
+    }
+  }
+</pre>
+
+This route copies files from the directory <code>/tmp/in</code> to
+</code>/tmp/out</code>, and logs that it has done so. Of course, 
+you might need to change these directories on your system.
+
+<h2>Step 3: configure logging</h2>
+
+We would like to see the DEBUG-level log output from the route, but
+not for anything else (unless, of course, we're debugging Camel).
+To do this, just add the following line to 
+<code>src/main/resources/log4j.properties</code>:
+
+<pre class="codeblock">
+log4j.logger.net.kevinboone.mavencameltest.MyRouteBuilder=DEBUG
+</pre>
+
+Camel itself will get the default, INFO, log level, unless you change it.
+
+<h2>Step 4: compiling</h2>
+
+With Maven, this could hardly be easier:
+
+<pre class="codeblock">
+$ mvn compile
+</pre>
+
+The first time you execute this command, it could take a long time, because
+the entire Camel framework and all its dependencies have to be downloaded
+to the local repository -- about 100Mb in total. Thereafter it should be
+a lot faster. 
+<p/>
+Note that there's no need to set up any class search path -- the Maven
+dependency management assumes that libraries downloaded to satisfy 
+dependencies should be included on the class path. 
+<p/>
+The compiled output will be written to the <code>target/classes</code>
+directory.
+
+<h2>Step 5: running the route</h2>
+
+Again, with Maven, this could hardly be simpler:
+
+<pre class="codeblock">
+$ mvn exec:java 
+</pre>
+
+This tells Maven (specifically, the <code>exec-maven-plugin</code>)
+to run the Java class specified in the <code>pom.xml</code> file; again,
+the classpath is managed automatically according to the dependencies.
+<p/>
+To test the route is working, copy a file into <code>/tmp/in</code>
+(or whatever directory you specified), and check that it appears
+in <code>/tmp/out</code>. The log should show something like this:
+
+<pre class="codeblock">
+[ExchangePattern: InOnly, BodyType: org.apache.camel.component.file.GenericFile,  
+Body: [Body is file based: GenericFile[/tmp/in/test.txt]]]
+</pre>
+
+<h2>Step 6: building a self-contained application for distribution</h2>
+
+With luck, we're now able to run the Camel application under the control
+of Maven. But what if we want to distribute the application, or just to
+run it without Maven? The problem lies in figuring out which library JARs to
+make available on the class search path. When we built the application
+manually this was conceptually easy -- since we were specifying all the
+JARs on the command line, we would know exactly which JARs to distribute;
+but if we're using Maven to manage all the dependencies implicitly, we
+won't necessarily have that information at hand. 
+<p/>
+It is possible to get Maven to identify the dependencies in detail but,
+since we want in this case to build a self-contained application, it's
+perhaps nicer to ask Maven to build the application in a single JAR file,
+containing all the dependent classes. We can then run the application
+using only that one JAR file. 
+<p/>
+There are various ways to create a single-JAR application using Maven;
+here I describe how to use the <code>maven-assembly-plugin</code> plugin to
+do it. Just add the following block of almost-boilerplate code
+to the <code>plugins</code> section of <code>pom.xml</code>:
+
+<pre class="codeblock" lang="xml">
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+	  <archive>
+	    <manifest>
+	      <mainClass>net.kevinboone.mavencameltest.MainApp</mainClass>
+	    </manifest>
+	  </archive>
+	  <descriptorRefs>
+	    <descriptorRef>jar-with-dependencies</descriptorRef>
+	  </descriptorRefs>
+        </configuration>
+	<executions>
+	  <execution>
+	  <id>make-assembly</id>
+	  <phase>package</phase>
+	  <goals>
+	    <goal>single</goal>
+	  </goals>
+	  </execution>
+	</executions>
+      </plugin>
+</pre>
+
+The only program-specific code here is:
+
+<pre class="codeblock" lang="xml">
+	      <mainClass>net.kevinboone.mavencameltest.MainApp</mainClass>
+</pre>
+
+This tells Maven to add to the JAR file's MANIFEST.MF file the line:
+
+<pre class="codeblock">
+main-class: net.kevinboone.mavencameltest.MainApp
+</pre>
+
+This, in turn, will tell the JVM what class's <code>main()</code> method
+to run when we run the JAR. The generated jar will be
+
+<pre>
+target/mavencameltest-1.0-SNAPSHOT-jar-with-dependencies.jar
+</pre>
+
+<p>
+To build the complete, self-contained application:
+
+<pre class="codeblock">
+mvn compile assembly:single
+</pre>
+
+Note that we still need to specify <code>compile</code> as a specific step.
+This illustrates a difference between Maven and tools like Ant (and Make,
+for that matter): Maven manages dependencies between the project and its
+libraries, but it isn't easy to specify dependencies between build steps.
+With Ant, it would be trivially easy to specify that the 'assemble' operation
+was dependent on successful completion of the 'compile' operation. 
+With Maven there is, so far as I know, no obvious way to do that.
+
+<p/>
+To run the JAR application, just use the command:
+
+<pre class="codeblock">
+java -jar target/mavencameltest-1.0-SNAPSHOT-jar-with-dependencies.jar
+</pre>
+
+Because this JAR is self-contained, it can be used on a system without
+Maven.
+
+<h2>Summary</h2>
+
+I hope it's clear that using Maven takes away a lot of the administrative
+hassle from setting up a Java application with complex dependencies. 
+The only thing left for the developer to do is to write the actual code...
+
+<h2>Downloads</h2>
+
+<a href="mavencameltest.zip">Source code bundle</a>
+<p/>
+<p/>
+

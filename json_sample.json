@@ -1,0 +1,264 @@
+{
+ "kind": "customsearch#search",
+ "url": {
+  "type": "application/json",
+  "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+ },
+ "queries": {
+  "nextPage": [
+   {
+    "title": "Google Custom Search - kevin boone",
+    "totalResults": "192",
+    "searchTerms": "kevin boone",
+    "count": 10,
+    "startIndex": 11,
+    "inputEncoding": "utf8",
+    "outputEncoding": "utf8",
+    "safe": "off",
+    "cx": "006692447265618499542:oqtlr1xtrve"
+   }
+  ],
+  "request": [
+   {
+    "title": "Google Custom Search - kevin boone",
+    "totalResults": "192",
+    "searchTerms": "kevin boone",
+    "count": 10,
+    "startIndex": 1,
+    "inputEncoding": "utf8",
+    "outputEncoding": "utf8",
+    "safe": "off",
+    "cx": "006692447265618499542:oqtlr1xtrve"
+   }
+  ]
+ },
+ "context": {
+  "title": "Kevinboone.net"
+ },
+ "searchInformation": {
+  "searchTime": 0.204938,
+  "formattedSearchTime": "0.20",
+  "totalResults": "192",
+  "formattedTotalResults": "192"
+ },
+ "items": [
+  {
+   "kind": "customsearch#result",
+   "title": "Kevin Boone's Web site",
+   "htmlTitle": "\u003cb\u003eKevin Boone&#39;s\u003c/b\u003e Web site",
+   "link": "http://kevinboone.net/",
+   "displayLink": "kevinboone.net",
+   "snippet": "Computing. Android logo. Linux utilities on Android ...without the pain of rooting \nand fiddling about with a debugger. It's not well-documented, but you can run ...",
+   "htmlSnippet": "Computing. Android logo. Linux utilities on Android ...without the pain of rooting \u003cbr\u003e\nand fiddling about with a debugger. It&#39;s not well-documented, but you can run&nbsp;...",
+   "cacheId": "TM0LrXTHFP4J",
+   "formattedUrl": "kevinboone.net/",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/bpdemo10.jpg"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "171",
+      "height": "114",
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMc_pvT0Ltz4ATvdcbulC5iwkRTFQRfFzqg71nVICIPN9IMf8mTA20Iw"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "KBOX downloads",
+   "htmlTitle": "KBOX downloads",
+   "link": "http://kevinboone.net/kbox2_downloads.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "You can put startup commands in $HOME/.vimrc in the usual way. zsh. Download\n. The zsh shell. Copyright © 1994-2013 Kevin Boone. Updated Jan 04 2014.",
+   "htmlSnippet": "You can put startup commands in $HOME/.vimrc in the usual way. zsh. Download\u003cbr\u003e\n. The zsh shell. Copyright © 1994-2013 \u003cb\u003eKevin Boone\u003c/b\u003e. Updated Jan 04 2014.",
+   "cacheId": "tnmva9dA-m8J",
+   "formattedUrl": "kevinboone.net/kbox2_downloads.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/kbox2_downloads.html",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/kbox_logo.gif"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "70",
+      "height": "81",
+      "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTz2G_o5Nn1uAfw5B7GO4GX81FQCGeRYfRxxLNiZdzj8k62YX8GeMAj"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Using standard Linux utilities in a stock, non-rooted Android device",
+   "htmlTitle": "Using standard Linux utilities in a stock, non-rooted Android device",
+   "link": "http://kevinboone.net/android_nonroot.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "... useful Linux utilities on a stock, non-rooted Android device. My main intention \nwith this project, which I'm calling kbox ('Kevin's implementation of busybox'), ...",
+   "htmlSnippet": "... useful Linux utilities on a stock, non-rooted Android device. My main intention \u003cbr\u003e\nwith this project, which I&#39;m calling kbox (&#39;\u003cb\u003eKevin&#39;s\u003c/b\u003e implementation of busybox&#39;),&nbsp;...",
+   "cacheId": "o5upxPqF2joJ",
+   "formattedUrl": "kevinboone.net/android_nonroot.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/android_nonroot.html",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/kbox_screenshot_1.png"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "177",
+      "height": "284",
+      "src": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTk2red6TQ4XRWfST90lZuVS-me2ThmrxbTmf6Iuk4dPPLEHKJmaC651vU"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "The KBOX2 project",
+   "htmlTitle": "The KBOX2 project",
+   "link": "http://kevinboone.net/kbox2.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "... this if you're interested in getting the source code for KBOX2, Screenshots See \nKBOX2 in action. Copyright © 1994-2013 Kevin Boone. Updated Feb 12 2014.",
+   "htmlSnippet": "... this if you&#39;re interested in getting the source code for KBOX2, Screenshots See \u003cbr\u003e\nKBOX2 in action. Copyright © 1994-2013 \u003cb\u003eKevin Boone\u003c/b\u003e. Updated Feb 12 2014.",
+   "cacheId": "jDAaomICE1AJ",
+   "formattedUrl": "kevinboone.net/kbox2.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/kbox2.html",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/kbox_logo.gif"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "70",
+      "height": "81",
+      "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTz2G_o5Nn1uAfw5B7GO4GX81FQCGeRYfRxxLNiZdzj8k62YX8GeMAj"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Bayesian statistics for dummies",
+   "htmlTitle": "Bayesian statistics for dummies",
+   "link": "http://kevinboone.net/bayes.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "is what is know as the 'prosectutor's fallacy' in forensic science, and Bayes tells \nus how serious an error it is. Copyright © 1994-2013 Kevin Boone. Updated May\n ...",
+   "htmlSnippet": "is what is know as the &#39;prosectutor&#39;s fallacy&#39; in forensic science, and Bayes tells \u003cbr\u003e\nus how serious an error it is. Copyright © 1994-2013 \u003cb\u003eKevin Boone\u003c/b\u003e. Updated May\u003cbr\u003e\n&nbsp;...",
+   "cacheId": "-D-nCVDhsCEJ",
+   "formattedUrl": "kevinboone.net/bayes.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/bayes.html"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "KBOX",
+   "htmlTitle": "KBOX",
+   "link": "http://kevinboone.net/kbox.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "Oct 25, 2012 ... ... Added frotz package. 24/10/12, Updated base package, to fix missing scp.bin. \nCopyright © 1994-2013 Kevin Boone. Updated May 01 2013.",
+   "htmlSnippet": "Oct 25, 2012 \u003cb\u003e...\u003c/b\u003e ... Added frotz package. 24/10/12, Updated base package, to fix missing scp.bin. \u003cbr\u003e\nCopyright © 1994-2013 \u003cb\u003eKevin Boone\u003c/b\u003e. Updated May 01 2013.",
+   "cacheId": "F-PKb8CtlXgJ",
+   "formattedUrl": "kevinboone.net/kbox.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/kbox.html",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/kbox_logo.gif"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "70",
+      "height": "81",
+      "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTz2G_o5Nn1uAfw5B7GO4GX81FQCGeRYfRxxLNiZdzj8k62YX8GeMAj"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Accreditation and membership",
+   "htmlTitle": "Accreditation and membership",
+   "link": "http://kevinboone.net/cv.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "... of applied potential tomography for imaging action potentials in the brain, \nUniversity of London. Copyright © 1994-2013 Kevin Boone. Updated Feb 27 \n2014.",
+   "htmlSnippet": "... of applied potential tomography for imaging action potentials in the brain, \u003cbr\u003e\nUniversity of London. Copyright © 1994-2013 \u003cb\u003eKevin Boone\u003c/b\u003e. Updated Feb 27 \u003cbr\u003e\n2014.",
+   "cacheId": "eEl1XjrPeiwJ",
+   "formattedUrl": "kevinboone.net/cv.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/cv.html"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "KBOX2 installation instructions",
+   "htmlTitle": "KBOX2 installation instructions",
+   "link": "http://kevinboone.net/kbox2_install.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "... which there are dependencies, over-ride the warnings by doing: $ dpkg -F \ndepends -i /sdcard/Download/{package}.deb. Copyright © 1994-2013 Kevin \nBoone.",
+   "htmlSnippet": "... which there are dependencies, over-ride the warnings by doing: $ dpkg -F \u003cbr\u003e\ndepends -i /sdcard/Download/{package}.deb. Copyright © 1994-2013 \u003cb\u003eKevin\u003c/b\u003e \u003cbr\u003e\n\u003cb\u003eBoone\u003c/b\u003e.",
+   "cacheId": "Fbqpsd-oYcoJ",
+   "formattedUrl": "kevinboone.net/kbox2_install.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/kbox2_install.html",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/kbox_logo.gif"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "70",
+      "height": "81",
+      "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTz2G_o5Nn1uAfw5B7GO4GX81FQCGeRYfRxxLNiZdzj8k62YX8GeMAj"
+     }
+    ]
+   }
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "Articles about law and politics",
+   "htmlTitle": "Articles about law and politics",
+   "link": "http://kevinboone.net/law_articles.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "Common sense and the law: the C1 crash helmet saga. Ancient history now, but \nstill illustrative of judicial thinking. Copyright © 1994-2013 Kevin Boone.",
+   "htmlSnippet": "Common sense and the law: the C1 crash helmet saga. Ancient history now, but \u003cbr\u003e\nstill illustrative of judicial thinking. Copyright © 1994-2013 \u003cb\u003eKevin Boone\u003c/b\u003e.",
+   "cacheId": "hXppQyNliekJ",
+   "formattedUrl": "kevinboone.net/law_articles.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/law_articles.html"
+  },
+  {
+   "kind": "customsearch#result",
+   "title": "What is involved in porting Linux utilities to KBOX?",
+   "htmlTitle": "What is involved in porting Linux utilities to KBOX?",
+   "link": "http://kevinboone.net/kbox2_faq.html",
+   "displayLink": "kevinboone.net",
+   "snippet": "KBOX originally stood for \"Kevin's implementation of Busybox\", because it grew \nout of my attempt to install Busybox on non-rooted Android device. These days ...",
+   "htmlSnippet": "KBOX originally stood for &quot;\u003cb\u003eKevin&#39;s\u003c/b\u003e implementation of Busybox&quot;, because it grew \u003cbr\u003e\nout of my attempt to install Busybox on non-rooted Android device. These days&nbsp;...",
+   "cacheId": "jJEV3ye1W0IJ",
+   "formattedUrl": "kevinboone.net/kbox2_faq.html",
+   "htmlFormattedUrl": "\u003cb\u003ekevinboone\u003c/b\u003e.net/kbox2_faq.html",
+   "pagemap": {
+    "cse_image": [
+     {
+      "src": "http://kevinboone.net/kbox_logo.gif"
+     }
+    ],
+    "cse_thumbnail": [
+     {
+      "width": "70",
+      "height": "81",
+      "src": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTz2G_o5Nn1uAfw5B7GO4GX81FQCGeRYfRxxLNiZdzj8k62YX8GeMAj"
+     }
+    ]
+   }
+  }
+ ]
+}

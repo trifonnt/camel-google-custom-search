@@ -1,0 +1,28 @@
+   Using Apache Camel to automate a Google custom search
+ - http://kevinboone.net/camelgooglesearch.html
+
+
+To use the Google Custom Search API, you need an API ID and a search
+engine reference. To get either of these you must log into the Google
+developer's console (https://console.developers.google.com) and create
+a new project. Enable the project for "Custom Search API", and then
+create a new search engine. By "search engine", google means the 
+specification of the sites to search and some other settings.
+To create a new search engine, see https://www.google.com/cse/. The 
+final result of this process will be an API key -- a long sequence
+of characters you can add to the search URL using the 'key=' parameter,
+and a search engine reference -- a long sequence of characters you can
+add to the search URI hsing the 'cx=' parameter. With these settings in
+place, a custom search URI looks like this:
+
+https://www.googleapis.com/customsearch/v1?q=text+to+search&key={my_api_key}&cx={my_search_engine_ref}
+
+camelgooglesearch.props looks like this:
+
+key={a long string}
+cx={another long string}
+
+JAVA_HOME=/usr/jdk1.7.0_40/ mvn -q exec:java -Dexec.args="ejb"
+
+
+
